@@ -5,6 +5,13 @@
 FROM ubuntu:latest
 MAINTAINER jwvdiermen
 
+# Setup locales
+ENV LANGUAGE en_US.UTF-8
+ENV LANG en_US.UTF-8
+ENV LC_ALL en_US.UTF-8
+
+RUN locale-gen en_US.UTF-8 && DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales
+
 # Install PostgreSQL APT repository
 RUN apt-get update && apt-get -y --force-yes install wget
 RUN echo deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main > /etc/apt/sources.list.d/peer60-postgres.list
