@@ -1,16 +1,16 @@
 #!/bin/bash
 
 if [[ $# -eq 0 ]]; then
-	echo "Usage: $0 <db_name>"
-	exit 1
+  echo "Usage: $0 <db_name>"
+  exit 1
 fi
 
 DB_NAME=$1
 
 if [ ! -f /var/lib/postgresql/9.3/main/.initialized ]; then
-	echo "=> Initializing PostgreSQL data directory"
-	/usr/lib/postgresql/9.3/bin/initdb -D /var/lib/postgresql/9.3/main
-	touch /var/lib/postgresql/9.3/main/.initialized
+  echo "=> Initializing PostgreSQL data directory"
+  /usr/lib/postgresql/9.3/bin/initdb -D /var/lib/postgresql/9.3/main
+  touch /var/lib/postgresql/9.3/main/.initialized
 fi
 
 DB_PASSWORD=$(pwgen -s 24 1)

@@ -27,6 +27,8 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y --force-yes inst
 ADD start.sh /start.sh
 ADD create_db.sh /create_db.sh
 ADD import_sql.sh /import_sql.sh
+ADD export_db.sh /export_db.sh
+ADD import_db.sh /import_db.sh
 ADD pg_hba.conf /etc/postgresql/9.3/main/pg_hba.conf
 ADD postgresql.conf /etc/postgresql/9.3/main/postgresql.conf
 RUN chmod 755 /*.sh
