@@ -8,8 +8,14 @@ fi
 DB_NAME=$1
 
 if [ ! -f /var/lib/postgresql/9.3/main/.initialized ]; then
+  echo "=> Preparing configuration"
+  cp /etc/postgresql/9.3/main/postgresql.conf.tpl /etc/postgresql/9.3/main/postgresql.conf
+  sed -i "s/\#{SHARED_BUFFERS}/${CFG_SHARED_BUFFERS}/" /etc/postgresql/9.3/main/postgresql.conf
+  sed -i "s/\#{WORK_MEM}/${CFG_WORK_MEM}/" /etc/postgresql/9.3/main/postgresql.conf
+
   echo "=> Initializing PostgreSQL data directory"
   /usr/lib/postgresql/9.3/bin/initdb -D /var/lib/postgresql/9.3/main
+
   touch /var/lib/postgresql/9.3/main/.initialized
 fi
 
